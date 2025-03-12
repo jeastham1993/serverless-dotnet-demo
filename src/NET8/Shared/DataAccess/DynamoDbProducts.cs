@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Amazon.DynamoDBv2;
+﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Shared.Models;
 
@@ -9,7 +6,7 @@ namespace Shared.DataAccess
 {
     public class DynamoDbProducts : ProductsDAO
     {
-        private static readonly string PRODUCT_TABLE_NAME = Environment.GetEnvironmentVariable("PRODUCT_TABLE_NAME") ?? string.Empty;
+        private static readonly string PRODUCT_TABLE_NAME = Environment.GetEnvironmentVariable("PRODUCT_TABLE_NAME") ?? "Products";
         private readonly AmazonDynamoDBClient _dynamoDbClient;
 
         public DynamoDbProducts()

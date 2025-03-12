@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Instrumentation.AWSLambda;
+using OpenTelemetry.Trace;
 using Shared.DataAccess;
 
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -15,10 +19,19 @@ namespace GetProducts
 {
     public class Function
     {
-        private readonly ProductsDAO dataAccess;
+        IHost _host;
+        private ProductsDAO _dataAccess;
         public Function()
         {
-            this.dataAccess = new DynamoDbProducts();
+            var builder = new HostApplicationBuilder();
+            // Call the AddServiceDefaults method from the shared service defaults project.
+            builder.AddServiceDefaults();
+
+            builder.Services.AddSingleton(new DynamoDbProducts());
+            
+            _host = builder.Build();
+            _dataAccess = _host.Services.GetRequiredService<ProductsDAO>();
+            
         }
 
         public async Task<APIGatewayHttpApiV2ProxyResponse> FunctionHandler(APIGatewayHttpApiV2ProxyRequest apigProxyEvent,
@@ -35,7 +48,7 @@ namespace GetProducts
     
             context.Logger.LogLine($"Received {apigProxyEvent}");
 
-            var products = await dataAccess.GetAllProducts();
+            var products = await _dataAccess.GetAllProducts();
     
             context.Logger.LogLine($"Found {products.Products.Count} product(s)");
     

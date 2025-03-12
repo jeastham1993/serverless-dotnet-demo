@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Aspire_GetProducts": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "exec --depsfile ./GetProducts.deps.json --runtimeconfig ./GetProducts.runtimeconfig.json $(HOME)/.dotnet/tools/.store/amazon.lambda.testtool/0.9.1/amazon.lambda.testtool/0.9.1/content/Amazon.Lambda.RuntimeSupport/net8.0/Amazon.Lambda.RuntimeSupport.dll GetProducts::GetProducts.Function::FunctionHandler",
+      "workingDirectory": "./bin/$(Configuration)/net8.0"
+    }
+  }
+}

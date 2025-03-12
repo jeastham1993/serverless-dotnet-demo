@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Serverless.Aspire.ServiceDefaults\Serverless.Aspire.ServiceDefaults.csproj" />
 		<ProjectReference Include="..\Shared\Shared.csproj" />
 	</ItemGroup>
 
