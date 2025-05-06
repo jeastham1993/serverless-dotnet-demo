@@ -14,7 +14,7 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="1.7.2" />
+    <PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="$(AmazonLambdaAspNetCoreServerHostingVersion)" />
     <PackageReference Include="Amazon.Lambda.Core" Version="$(AmazonLambdaCoreVersion)" />
     <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="$(ApiGatewayEventsVersion)" />
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="$(AmazonLambdaSerializationVersion)" />
@@ -27,9 +27,4 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\template.yaml">
-      <Link>template.yaml</Link>
-    </Content>
-  </ItemGroup>
 </Project>
